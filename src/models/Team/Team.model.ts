@@ -1,22 +1,23 @@
 import { Schema, model, connect } from 'mongoose';
 
 // 1. Create an interface representing a document in MongoDB.
-export interface Team {
-  rank: string;
-  point: string;
+export interface teamType {
+  id?: number;
+  points: Number;
+  pos: String;
   name: string;
-  driver: [];
-  // avatar?: string;
+  year?: number;
 }
 
 // 2. Create a Schema corresponding to the document interface.
-const teamSchema = new Schema<Team>({
-  name: { type: String, required: true },
-  point: {type: String, require: false},
-  driver: [],
-  rank: String,
+const teamSchema = new Schema<teamType>({
+  id: Number,
+  name: { type: String, required: false },
+  points: {type: Number, require: false},
+  pos: String,
+  year: Number
   // avatar: String
 });
 
 
-export const Team = model<Team>('Driver', teamSchema);
+export const Team = model<teamType>('Team', teamSchema);

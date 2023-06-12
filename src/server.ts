@@ -1,23 +1,16 @@
-import axios from 'axios';
-import express, { Request, Response } from 'express';
-import { crawlDriver, crawlTeam , crawlSchedule } from './crawl/crawl';
-import { connectToDatabase } from './database/database'
-const app = express();
-
+import express, { Request, Response,Application } from 'express';
+import { connectToDatabase } from './database/database';
+import {routes} from './routes/app'
+import {crawData} from './crawl/crawl'
+const app: Application = express();
 
 try {
-    
     connectToDatabase();
 } catch (error) {
     
 }
-// Crawling data 
-crawlDriver();
-crawlTeam();
-crawlSchedule();
-app.get('/', async (req: Request, res: Response) => {
-    res.send('Hello, World!');
-});
+// crawData();
+routes(app);
 
 const port = 3000;
 app.listen(port, () => {
