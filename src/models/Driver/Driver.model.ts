@@ -1,23 +1,22 @@
 import { Schema, model } from 'mongoose';
-
-// 1. Create an interface representing a document in MongoDB.
 export interface driverType {
-  rank: string;
-  point: string;
+  _id?: Number;
+  rank?: string;
+  points: string;
+  nationality: string;
   name: string;
   team: string;
-  // avatar?: string;
-
+  year?: number;
 }
 
 // 2. Create a Schema corresponding to the document interface.
 const driverSchema = new Schema<driverType>({
   name: { type: String, required: true },
-  point: {type: String, require: false},
+  points: {type: String, require: false},
+  nationality: String,
   team: String,
+  year: Number,
   rank: String,
-  // avatar: String
 });
-
-
+// plugin
 export const Driver = model<driverType>('Driver', driverSchema);
